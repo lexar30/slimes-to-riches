@@ -5,16 +5,16 @@ using UnityEngine.UI;
 public sealed class OrientationLayoutSettings
 {
     [SerializeField]
-    private GameObject root;
+    private GameObject root = null;
 
     [SerializeField]
-    private GameObject infoPanelSlot;
+    private GameObject infoPanelSlot = null;
 
     [SerializeField]
-    private GameObject gameFieldSlot;
+    private GameObject gameFieldSlot = null;
 
     [SerializeField]
-    private GameObject upgradesPanelSlot;
+    private GameObject upgradesPanelSlot = null;
 
     public GameObject Root => root;
     public GameObject InfoPanelSlot => infoPanelSlot;
@@ -26,28 +26,28 @@ public class UILayoutSetter : MonoBehaviour
 {
     [Header("Canvas Settings")]
     [SerializeField]
-    private CanvasScaler scaler;
+    private CanvasScaler scaler = null;
 
     [Space(20)]
     [Header("Layouts Settings")]
     [SerializeField]
-    private OrientationLayoutSettings portraitSettings;
+    private OrientationLayoutSettings portraitSettings = null;
 
     [SerializeField]
-    private OrientationLayoutSettings landscapeSettings;
+    private OrientationLayoutSettings landscapeSettings = null;
 
     private OrientationLayoutSettings currentSettings = null;
 
     [Space(20)]
     [Header("InGame UI Panels")]
     [SerializeField]
-    private GameObject infoPanel;
+    private GameObject infoPanel = null;
 
     [SerializeField]
-    private GameObject gameField;
+    private GameObject gameField = null;
 
     [SerializeField]
-    private GameObject upgradesPanel;
+    private GameObject upgradesPanel = null;
 
     private float prevAspectRatio = 0.0f;
 
