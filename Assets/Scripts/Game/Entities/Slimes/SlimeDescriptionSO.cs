@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SlimeDescriptionSO", menuName = "Arena")]
+[CreateAssetMenu(fileName = "SlimeDescriptionSO", menuName = "Arena/SlimeDescriptionSO")]
 public class SlimeDescriptionSO : ScriptableObject
 {
     public float SpeedMin = 0.0f;
@@ -13,6 +13,9 @@ public class SlimeDescriptionSO : ScriptableObject
 
     public float IdlingTimeMin = 0.0f;
     public float IdlingTimeMax = 0.0f;
+
+    public int SizeMin = 0;
+    public int SizeMax = 0;
 
     public Sprite Sprite = null;
 

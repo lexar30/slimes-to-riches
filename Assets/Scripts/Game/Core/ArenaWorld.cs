@@ -37,16 +37,17 @@ namespace Arena
             foreach (SlimeRuntimeState slime in activeSlimes)
             {
                 MovementProcessor.Update(slime, dt);
+                grid.UpdateCell(slime);
             }
         }
 
-        public void AddSlime(SlimeRuntimeState slimeState)
+        public void Add(SlimeRuntimeState slimeState)
         {
             activeSlimes.Add(slimeState);
             grid.Add(slimeState);
         }
 
-        public void RemoveSlime(SlimeRuntimeState slimeState)
+        public void Remove(SlimeRuntimeState slimeState)
         {
             activeSlimes.Remove(slimeState);
             grid.Remove(slimeState);

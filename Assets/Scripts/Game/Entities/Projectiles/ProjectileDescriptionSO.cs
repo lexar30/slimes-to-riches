@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ProjectileDescriptionSO", menuName = "Arena")]
+[CreateAssetMenu(fileName = "ProjectileDescriptionSO", menuName = "Arena/ProjectileDescriptionSO")]
 public class ProjectileDescriptionSO : ScriptableObject
 {
     public float SpeedMin = 0.0f;

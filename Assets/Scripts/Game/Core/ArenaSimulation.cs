@@ -1,12 +1,13 @@
 using Arena;
 using Arena.Entity;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.LightTransport;
 using UnityEngine.Pool;
 
 public class ArenaSimulation : MonoBehaviour
 {
+    [SerializeField]
+    private ArenaView view;
+
     [SerializeField]
     private ArenaSettingsSO settings;
 
@@ -20,14 +21,11 @@ public class ArenaSimulation : MonoBehaviour
     private SlimeGenerator generator;
     private ArenaWorld world;
 
-    private void Start()
+    private void Awake()
     {
-        world = new ArenaWorld(settings.columnsCount, settings.rowsCount);
-        generator = new SlimeGenerator(generatorSettings);
-
         slimesPool = new ObjectPool<SlimeRuntimeState>(
             createFunc: () => new SlimeRuntimeState()
-            , actionOnRelease: ReleaseSlime
+            , actionOnRelease: Release
             , actionOnGet: null
             , actionOnDestroy: null
             , collectionCheck: true
@@ -36,10 +34,17 @@ public class ArenaSimulation : MonoBehaviour
         );
     }
 
+    private void Start()
+    {
+        world = new ArenaWorld(settings.columnsCount, settings.rowsCount);
+        generator = new SlimeGenerator(generatorSettings);
+    }
+
     private void Update()
     {
-        world.Update(Time.deltaTime);
         TryGenerateSlimes();
+        world.Update(Time.deltaTime);
+        view.Sync();
     }
 
     private void TryGenerateSlimes()
@@ -59,15 +64,22 @@ public class ArenaSimulation : MonoBehaviour
                 return;
             }
 
-            generator.Initialize(slimeState);
-            world.AddSlime(slimeState);
+            if (!generator.TryInitialize(slimeState))
+            {
+                slimesPool.Release(slimeState);
+                return;
+            }
+
+            world.Add(slimeState);
+            view.Add(slimeState);
 
             --requiredCount;
         }
     }
 
-    private void ReleaseSlime(SlimeRuntimeState slimeState)
+    private void Release(SlimeRuntimeState slimeState)
     {
-        world.RemoveSlime(slimeState);
+        world.Remove(slimeState);
+        view.Remove(slimeState);
     }
 }

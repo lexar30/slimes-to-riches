@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GeneralArenaSettingsSO", menuName = "Arena")]
+[CreateAssetMenu(fileName = "GeneralArenaSettingsSO", menuName = "Arena/GeneralArenaSettingsSO")]
 public class GeneralArenaSettingsSO : ScriptableObject
 {
     public int DefaultPoolCapacity = 32;

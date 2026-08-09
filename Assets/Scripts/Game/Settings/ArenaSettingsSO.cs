@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ArenaSettingsSO", menuName = "Arena")]
+[CreateAssetMenu(fileName = "ArenaSettingsSO", menuName = "Arena/ArenaSettingsSO")]
 public class ArenaSettingsSO : ScriptableObject
 {
     public int columnsCount = 0;
