@@ -1,23 +1,57 @@
+using Arena;
 using Arena.Entity;
 using System;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Pool;
 
-public sealed class SlimeGenerator
+public sealed class SlimeGenerator : MonoBehaviour
 {
+    [SerializeField]
     private SlimeGeneratorSettingsSO settings;
+
+    [SerializeField]
+    private GeneralArenaSettingsSO generalArenaSettings;
+
+    [SerializeField]
+    private ArenaWorld world;
+
+    [SerializeField]
+    private UnityEvent<SlimeRuntimeState> slimeCreated = new();
+
+    private ObjectPool<SlimeRuntimeState> slimesPool;
     private HardnessLevelDescription currentHardnessLevel = null;
 
-    public SlimeGenerator(SlimeGeneratorSettingsSO settings)
+    private void Awake()
     {
         if (settings == null)
         {
             throw new ArgumentNullException(nameof(settings));
         }
 
+        if (generalArenaSettings == null)
+        {
+            throw new ArgumentNullException(nameof(generalArenaSettings));
+        }
+
+        if (world == null)
+        {
+            throw new ArgumentNullException(nameof(world));
+        }
+
         ValidateSettings(settings);
 
-        this.settings = settings;
         currentHardnessLevel = settings.hardnessLevelDescriptions[0];
+
+        slimesPool = new ObjectPool<SlimeRuntimeState>(
+            createFunc: () => new SlimeRuntimeState()
+            , actionOnRelease: null
+            , actionOnGet: null
+            , actionOnDestroy: null
+            , collectionCheck: true
+            , defaultCapacity: generalArenaSettings.DefaultPoolCapacity
+            , maxSize: generalArenaSettings.MaxPoolCapacity
+        );
     }
 
     private static void ValidateSettings(SlimeGeneratorSettingsSO settings)
@@ -139,6 +173,40 @@ public sealed class SlimeGenerator
         }
 
         return requiredCount;
+    }
+
+    public void Generate()
+    {
+        int requiredCount = GetSpawnCount(world.ActiveSlimesCount);
+
+        while (requiredCount > 0)
+        {
+            SlimeRuntimeState slimeState = slimesPool.Get();
+            if (slimeState == null)
+            {
+                Debug.Log("[SlimeGenerator::Generate]: pool was unable to generate SlimeRuntimeState.");
+                return;
+            }
+
+            if (!TryInitialize(slimeState))
+            {
+                slimesPool.Release(slimeState);
+                return;
+            }
+
+            slimeCreated?.Invoke(slimeState);
+            --requiredCount;
+        }
+    }
+
+    public void Release(SlimeRuntimeState slimeState)
+    {
+        if (slimeState == null)
+        {
+            return;
+        }
+
+        slimesPool.Release(slimeState);
     }
 
     private SlimeDescriptionSO PickSlimeDescription()

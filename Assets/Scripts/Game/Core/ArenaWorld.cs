@@ -1,33 +1,41 @@
 using Arena.Entity;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Arena
 {
-    public sealed class ArenaWorld
+    public sealed class ArenaWorld : MonoBehaviour
     {
-        private List<SlimeRuntimeState> activeSlimes;
+        [SerializeField]
+        private ArenaSettingsSO settings;
+
+        private readonly List<SlimeRuntimeState> activeSlimes = new();
         private SlimeUniformGrid grid;
 
         public int ActiveSlimesCount => activeSlimes.Count;
 
-        public ArenaWorld(int columnsCount, int rowsCount)
+        private void Awake()
         {
-            if (columnsCount <= 0)
+            if (settings == null)
             {
-                throw new ArgumentOutOfRangeException(nameof(columnsCount));
+                throw new ArgumentNullException(nameof(settings));
             }
 
-            if (rowsCount <= 0)
+            if (settings.columnsCount <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(rowsCount));
+                throw new ArgumentOutOfRangeException(nameof(settings.columnsCount));
             }
 
-            grid = new SlimeUniformGrid(columnsCount, rowsCount);
-            activeSlimes = new List<SlimeRuntimeState>();
+            if (settings.rowsCount <= 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(settings.rowsCount));
+            }
+
+            grid = new SlimeUniformGrid(settings.columnsCount, settings.rowsCount);
         }
 
-        public void Update(float dt)
+        public void ProcessMovement(float dt)
         {
             if (activeSlimes.Count == 0)
             {

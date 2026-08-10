@@ -129,8 +129,10 @@ GameObject:
   m_Component:
   - component: {fileID: 60872429}
   - component: {fileID: 60872428}
+  - component: {fileID: 60872430}
+  - component: {fileID: 60872431}
   m_Layer: 0
-  m_Name: ArenaSimulator
+  m_Name: Arena Simulation Loop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,11 +149,113 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38a7400a42bb8ed4ca14633aab808264, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArenaSimulation
-  view: {fileID: 172909700}
+  m_EditorClassIdentifier: Assembly-CSharp::ArenaSimulationLoop
+  PreSimulation:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 60872431}
+        m_TargetAssemblyTypeName: SlimeGenerator, Assembly-CSharp
+        m_MethodName: Generate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument:
+          m_BoolArgument: 0
+        m_CallState: 2
+  CalculateMovement:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 60872430}
+        m_TargetAssemblyTypeName: Arena.ArenaWorld, Assembly-CSharp
+        m_MethodName: ProcessMovement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument:
+          m_BoolArgument: 0
+        m_CallState: 2
+  CalculateCollision:
+    m_PersistentCalls:
+      m_Calls: []
+  PostSimulation:
+    m_PersistentCalls:
+      m_Calls: []
+  UpdatePresentation:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 172909700}
+        m_TargetAssemblyTypeName: SlimeView, Assembly-CSharp
+        m_MethodName: Sync
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument:
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &60872430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60872427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 248ad68d378b80447b241668fdc2bb60, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::Arena.ArenaWorld
   settings: {fileID: 11400000, guid: 967c14f50c4a4854fa8a062f91eb7514, type: 2}
-  generatorSettings: {fileID: 11400000, guid: ae7b3ed2ec796844bb114d563127bb7f, type: 2}
+--- !u!114 &60872431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60872427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89ce7bd4ad5470644a333f8cf825d941, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeGenerator
+  settings: {fileID: 11400000, guid: ae7b3ed2ec796844bb114d563127bb7f, type: 2}
   generalArenaSettings: {fileID: 11400000, guid: 370590b721fff4c4badf29a9c7ad028b, type: 2}
+  world: {fileID: 60872430}
+  slimeCreated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 60872430}
+        m_TargetAssemblyTypeName: Arena.ArenaWorld, Assembly-CSharp
+        m_MethodName: Add
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument:
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 172909700}
+        m_TargetAssemblyTypeName: SlimeView, Assembly-CSharp
+        m_MethodName: Add
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument:
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &60872429
 Transform:
   m_ObjectHideFlags: 0
@@ -214,7 +318,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dace2eae30617c341809d9196ffd2c04, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArenaView
+  m_EditorClassIdentifier: Assembly-CSharp::SlimeView
   sizeScaleSettings: {fileID: 11400000, guid: 3f8a46b9863909340b2970be694e3de6, type: 2}
   generalArenaSettings: {fileID: 11400000, guid: 370590b721fff4c4badf29a9c7ad028b, type: 2}
   settings: {fileID: 11400000, guid: 0f653d82b64ed0240b73e111130be16a, type: 2}

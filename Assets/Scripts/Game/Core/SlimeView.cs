@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.UI;
 
-public class ArenaView : MonoBehaviour
+public class SlimeView : MonoBehaviour
 {
     [SerializeField]
     private SizeScaleTableSO sizeScaleSettings = null;
@@ -45,7 +45,7 @@ public class ArenaView : MonoBehaviour
         if (arenaRectTransform == null)
         {
             throw new ArgumentException(
-                "[ArenaView::NormalizedToAnchoredPosition]: arenaRectTransform not set.",
+                "[SlimeView::NormalizedToAnchoredPosition]: arenaRectTransform not set.",
                 nameof(settings)
             );
         }
@@ -82,7 +82,7 @@ public class ArenaView : MonoBehaviour
         EntityView view = slimesPool.Get();
         if (view == null)
         {
-            Debug.Log("[ArenaView::Add]: pool was unable to generate EntityView for SlimeRuntimeState.");
+            Debug.Log("[SlimeView::Add]: pool was unable to generate EntityView for SlimeRuntimeState.");
             return;
         }
 
@@ -122,7 +122,7 @@ public class ArenaView : MonoBehaviour
         if (view.RectTransform == null)
         {
             throw new ArgumentException(
-                "[ArenaView::Create]: prefab must contains RectTransform.",
+                "[SlimeView::Create]: prefab must contain RectTransform.",
                 nameof(settings)
             );
         }
@@ -131,7 +131,7 @@ public class ArenaView : MonoBehaviour
         if (view.Image == null)
         {
             throw new ArgumentException(
-                "[ArenaView::Create]: prefab must contains Image.",
+                "[SlimeView::Create]: prefab must contain Image.",
                 nameof(settings)
             );
         }
