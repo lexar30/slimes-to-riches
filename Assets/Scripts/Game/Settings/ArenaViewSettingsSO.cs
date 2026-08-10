@@ -1,7 +1,10 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ArenaViewSettingsSO", menuName = "Arena/ArenaViewSettingsSO")]
-public class ArenaViewSettingsSO : ScriptableObject
+namespace SlimesToRiches.Arena.Settings
 {
-    public GameObject ViewPrefab;
+    [CreateAssetMenu(fileName = "ArenaViewSettingsSO", menuName = "Arena/ArenaViewSettingsSO")]
+    public class ArenaViewSettingsSO : ScriptableObject
+    {
+        public GameObject ViewPrefab;
+    }
 }

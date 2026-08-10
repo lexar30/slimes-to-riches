@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 440a22ab13fa1b64dbc37290f9bb67cc, type: 3}
   m_Name: SlimeDescriptionSO_TestSlime
-  m_EditorClassIdentifier: Assembly-CSharp::SlimeDescriptionSO
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Entities.Slimes.SlimeDescriptionSO
   SpeedMin: 0.1
   SpeedMax: 0.6
   MaxHP: 5

@@ -11,6 +11,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52d8c7dec7e3a0c4793faf5ece5d5d52, type: 3}
   m_Name: DefaultGeneralArenaSettingsSO
-  m_EditorClassIdentifier: Assembly-CSharp::GeneralArenaSettingsSO
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Settings.GeneralArenaSettingsSO
   DefaultPoolCapacity: 32
   MaxPoolCapacity: 256

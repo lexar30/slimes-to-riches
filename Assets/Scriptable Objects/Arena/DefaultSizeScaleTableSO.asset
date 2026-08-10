@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcfea409da9bad341902e3bee68b555f, type: 3}
   m_Name: DefaultSizeScaleTableSO
-  m_EditorClassIdentifier: Assembly-CSharp::SizeScaleTableSO
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Entities.SizeScaleTableSO
   Table:
   - Size: 0
     Scale: 1

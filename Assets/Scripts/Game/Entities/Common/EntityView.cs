@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Arena.Entity
+namespace SlimesToRiches.Arena.Entities
 {
     public class EntityView
     {

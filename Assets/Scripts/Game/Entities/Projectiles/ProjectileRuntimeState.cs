@@ -1,7 +1,8 @@
 using JetBrains.Annotations;
+using SlimesToRiches.Arena.Entities;
 using UnityEngine;
 
-namespace Arena.Entity
+namespace SlimesToRiches.Arena.Entities.Projectiles
 {
     public sealed class ProjectileRuntimeState : MovableRuntimeState
     {

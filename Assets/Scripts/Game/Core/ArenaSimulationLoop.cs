@@ -1,29 +1,32 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ArenaSimulationLoop : MonoBehaviour
+namespace SlimesToRiches.Arena.Core
 {
-    [SerializeField]
-    private UnityEvent PreSimulation = new();
-
-    [SerializeField]
-    private UnityEvent<float> CalculateMovement = new();
-
-    [SerializeField]
-    private UnityEvent CalculateCollision = new();
-
-    [SerializeField]
-    private UnityEvent PostSimulation = new();
-
-    [SerializeField]
-    private UnityEvent UpdatePresentation = new();
-
-    private void Update()
+    public class ArenaSimulationLoop : MonoBehaviour
     {
-        PreSimulation?.Invoke();
-        CalculateMovement?.Invoke(Time.deltaTime);
-        CalculateCollision?.Invoke();
-        PostSimulation?.Invoke();
-        UpdatePresentation?.Invoke();
+        [SerializeField]
+        private UnityEvent PreSimulation = new();
+
+        [SerializeField]
+        private UnityEvent<float> CalculateMovement = new();
+
+        [SerializeField]
+        private UnityEvent CalculateCollision = new();
+
+        [SerializeField]
+        private UnityEvent PostSimulation = new();
+
+        [SerializeField]
+        private UnityEvent UpdatePresentation = new();
+
+        private void Update()
+        {
+            PreSimulation?.Invoke();
+            CalculateMovement?.Invoke(Time.deltaTime);
+            CalculateCollision?.Invoke();
+            PostSimulation?.Invoke();
+            UpdatePresentation?.Invoke();
+        }
     }
 }

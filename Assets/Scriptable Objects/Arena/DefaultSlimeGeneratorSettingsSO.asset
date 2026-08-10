@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a770be79132f3184fb562e38e392d08f, type: 3}
   m_Name: DefaultSlimeGeneratorSettingsSO
-  m_EditorClassIdentifier: Assembly-CSharp::SlimeGeneratorSettingsSO
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Entities.Slimes.SlimeGeneratorSettingsSO
   NormalizedGenerationAreaConstraints:
     serializedVersion: 2
     x: 0.15

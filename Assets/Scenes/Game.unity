@@ -149,12 +149,12 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38a7400a42bb8ed4ca14633aab808264, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ArenaSimulationLoop
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Core.ArenaSimulationLoop
   PreSimulation:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 60872431}
-        m_TargetAssemblyTypeName: SlimeGenerator, Assembly-CSharp
+        m_TargetAssemblyTypeName: SlimesToRiches.Arena.Entities.Slimes.SlimeGenerator, Assembly-CSharp
         m_MethodName: Generate
         m_Mode: 1
         m_Arguments:
@@ -169,7 +169,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 60872430}
-        m_TargetAssemblyTypeName: Arena.ArenaWorld, Assembly-CSharp
+        m_TargetAssemblyTypeName: SlimesToRiches.Arena.Core.ArenaWorld, Assembly-CSharp
         m_MethodName: ProcessMovement
         m_Mode: 0
         m_Arguments:
@@ -190,7 +190,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 172909700}
-        m_TargetAssemblyTypeName: SlimeView, Assembly-CSharp
+        m_TargetAssemblyTypeName: SlimesToRiches.Arena.Core.SlimeView, Assembly-CSharp
         m_MethodName: Sync
         m_Mode: 1
         m_Arguments:
@@ -212,7 +212,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 248ad68d378b80447b241668fdc2bb60, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::Arena.ArenaWorld
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Core.ArenaWorld
   settings: {fileID: 11400000, guid: 967c14f50c4a4854fa8a062f91eb7514, type: 2}
 --- !u!114 &60872431
 MonoBehaviour:
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89ce7bd4ad5470644a333f8cf825d941, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::SlimeGenerator
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Entities.Slimes.SlimeGenerator
   settings: {fileID: 11400000, guid: ae7b3ed2ec796844bb114d563127bb7f, type: 2}
   generalArenaSettings: {fileID: 11400000, guid: 370590b721fff4c4badf29a9c7ad028b, type: 2}
   world: {fileID: 60872430}
@@ -233,7 +233,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 60872430}
-        m_TargetAssemblyTypeName: Arena.ArenaWorld, Assembly-CSharp
+        m_TargetAssemblyTypeName: SlimesToRiches.Arena.Core.ArenaWorld, Assembly-CSharp
         m_MethodName: Add
         m_Mode: 0
         m_Arguments:
@@ -245,7 +245,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 172909700}
-        m_TargetAssemblyTypeName: SlimeView, Assembly-CSharp
+        m_TargetAssemblyTypeName: SlimesToRiches.Arena.Core.SlimeView, Assembly-CSharp
         m_MethodName: Add
         m_Mode: 0
         m_Arguments:
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dace2eae30617c341809d9196ffd2c04, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SlimeView
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Core.SlimeView
   sizeScaleSettings: {fileID: 11400000, guid: 3f8a46b9863909340b2970be694e3de6, type: 2}
   generalArenaSettings: {fileID: 11400000, guid: 370590b721fff4c4badf29a9c7ad028b, type: 2}
   settings: {fileID: 11400000, guid: 0f653d82b64ed0240b73e111130be16a, type: 2}
@@ -902,7 +902,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f3221a0d3d11aca44a98080170a03892, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UILayoutSetter
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.UI.UILayoutSetter
   scaler: {fileID: 1266538519}
   portraitSettings:
     root: {fileID: 672599508}

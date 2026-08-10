@@ -11,5 +11,5 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 602ac707d24d5d94ea44196b8f897dcd, type: 3}
   m_Name: DefaultArenaViewSettingsSO
-  m_EditorClassIdentifier: Assembly-CSharp::ArenaViewSettingsSO
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Settings.ArenaViewSettingsSO
   ViewPrefab: {fileID: 3853503258309194211, guid: 88eefe85d96b49d498f81922e2093674, type: 3}

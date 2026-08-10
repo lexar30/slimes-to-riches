@@ -1,9 +1,12 @@
-using Arena.Entity;
+using SlimesToRiches.Arena.Entities.Slimes;
+using SlimesToRiches.Arena.Settings;
+using SlimesToRiches.Arena.Spatial;
+using SlimesToRiches.Arena.Systems;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Arena
+namespace SlimesToRiches.Arena.Core
 {
     public sealed class ArenaWorld : MonoBehaviour
     {

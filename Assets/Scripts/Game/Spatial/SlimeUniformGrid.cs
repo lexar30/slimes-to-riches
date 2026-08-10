@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Arena.Entity;
+using SlimesToRiches.Arena.Entities.Slimes;
 using UnityEngine;
 
-namespace Arena
+namespace SlimesToRiches.Arena.Spatial
 {
     public sealed class SlimeUniformGrid
     {

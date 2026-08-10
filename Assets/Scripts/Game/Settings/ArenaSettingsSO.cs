@@ -1,8 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ArenaSettingsSO", menuName = "Arena/ArenaSettingsSO")]
-public class ArenaSettingsSO : ScriptableObject
+namespace SlimesToRiches.Arena.Settings
 {
-    public int columnsCount = 0;
-    public int rowsCount = 0;
+    [CreateAssetMenu(fileName = "ArenaSettingsSO", menuName = "Arena/ArenaSettingsSO")]
+    public class ArenaSettingsSO : ScriptableObject
+    {
+        public int columnsCount = 0;
+        public int rowsCount = 0;
+    }
 }

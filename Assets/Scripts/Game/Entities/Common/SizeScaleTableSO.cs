@@ -2,34 +2,37 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public sealed class SizeScale
+namespace SlimesToRiches.Arena.Entities
 {
-    public int Size = 0;
-    public float Scale = 0.0f;
-}
-
-[CreateAssetMenu(fileName = "SizeScaleTableSO", menuName = "Arena/SizeScaleTableSO")]
-public class SizeScaleTableSO : ScriptableObject
-{
-    public List<SizeScale> Table = null;
-
-    public float GetScaleFor(int Size)
+    [Serializable]
+    public sealed class SizeScale
     {
-        if (Table == null || Table.Count == 0)
-        {
-            Debug.Log("[SizeScaleTableSO::GetScaleFor]: Table is empty.");
-            return 1.0f;
-        }
+        public int Size = 0;
+        public float Scale = 0.0f;
+    }
 
-        for (int i = 1; i < Table.Count; ++i)
+    [CreateAssetMenu(fileName = "SizeScaleTableSO", menuName = "Arena/SizeScaleTableSO")]
+    public class SizeScaleTableSO : ScriptableObject
+    {
+        public List<SizeScale> Table = null;
+
+        public float GetScaleFor(int Size)
         {
-            if (Size < Table[i].Size)
+            if (Table == null || Table.Count == 0)
             {
-                return Table[i - 1].Scale;
+                Debug.Log("[SizeScaleTableSO::GetScaleFor]: Table is empty.");
+                return 1.0f;
             }
-        }
 
-        return Table[0].Scale;
+            for (int i = 1; i < Table.Count; ++i)
+            {
+                if (Size < Table[i].Size)
+                {
+                    return Table[i - 1].Scale;
+                }
+            }
+
+            return Table[0].Scale;
+        }
     }
 }

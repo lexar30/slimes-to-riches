@@ -11,6 +11,6 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42105b60cdddd354dbe6fda998d0cb0e, type: 3}
   m_Name: DefaultArenaSettingsSO
-  m_EditorClassIdentifier: Assembly-CSharp::ArenaSettingsSO
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Settings.ArenaSettingsSO
   columnsCount: 10
   rowsCount: 10

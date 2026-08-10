@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Arena.Entity
+namespace SlimesToRiches.Arena.Entities
 {
     public class MovableRuntimeState
     {

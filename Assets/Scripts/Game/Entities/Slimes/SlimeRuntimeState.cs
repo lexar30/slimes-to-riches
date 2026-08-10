@@ -1,6 +1,7 @@
+using SlimesToRiches.Arena.Entities;
 using UnityEngine;
 
-namespace Arena.Entity
+namespace SlimesToRiches.Arena.Entities.Slimes
 {
     public enum SlimeState
     {
