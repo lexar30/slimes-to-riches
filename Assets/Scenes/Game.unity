@@ -128,11 +128,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 60872429}
-  - component: {fileID: 60872428}
-  - component: {fileID: 60872430}
-  - component: {fileID: 60872431}
   m_Layer: 0
-  m_Name: Arena Simulation Loop
+  m_Name: Arena Systems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,7 +141,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 60872427}
+  m_GameObject: {fileID: 60872432}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 38a7400a42bb8ed4ca14633aab808264, type: 3}
@@ -169,7 +166,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 60872430}
-        m_TargetAssemblyTypeName: SlimesToRiches.Arena.Core.ArenaWorld, Assembly-CSharp
+        m_TargetAssemblyTypeName: SlimesToRiches.Arena.Core.ArenaGridProcessor, Assembly-CSharp
         m_MethodName: ProcessMovement
         m_Mode: 0
         m_Arguments:
@@ -207,12 +204,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 60872427}
+  m_GameObject: {fileID: 60872434}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 248ad68d378b80447b241668fdc2bb60, type: 3}
   m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Core.ArenaWorld
+  m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Core.ArenaGridProcessor
   settings: {fileID: 11400000, guid: 967c14f50c4a4854fa8a062f91eb7514, type: 2}
 --- !u!114 &60872431
 MonoBehaviour:
@@ -220,7 +217,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 60872427}
+  m_GameObject: {fileID: 60872436}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 89ce7bd4ad5470644a333f8cf825d941, type: 3}
@@ -228,12 +225,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Entities.Slimes.SlimeGenerator
   settings: {fileID: 11400000, guid: ae7b3ed2ec796844bb114d563127bb7f, type: 2}
   generalArenaSettings: {fileID: 11400000, guid: 370590b721fff4c4badf29a9c7ad028b, type: 2}
-  world: {fileID: 60872430}
+  processor: {fileID: 60872430}
   slimeCreated:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 60872430}
-        m_TargetAssemblyTypeName: SlimesToRiches.Arena.Core.ArenaWorld, Assembly-CSharp
+        m_TargetAssemblyTypeName: SlimesToRiches.Arena.Core.ArenaGridProcessor, Assembly-CSharp
         m_MethodName: Add
         m_Mode: 0
         m_Arguments:
@@ -265,11 +262,110 @@ Transform:
   m_GameObject: {fileID: 60872427}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 371.1401, y: 536.70984, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 60872433}
+  - {fileID: 60872435}
+  - {fileID: 60872437}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &60872432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 60872433}
+  - component: {fileID: 60872428}
+  m_Layer: 0
+  m_Name: Simulation Loop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &60872433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60872432}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 60872429}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &60872434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 60872435}
+  - component: {fileID: 60872430}
+  m_Layer: 0
+  m_Name: Arena Grid Processor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &60872435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60872434}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 60872429}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &60872436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 60872437}
+  - component: {fileID: 60872431}
+  m_Layer: 0
+  m_Name: Slime Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &60872437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60872436}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 60872429}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &172909698
 GameObject:
@@ -280,7 +376,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 172909699}
-  - component: {fileID: 172909700}
   m_Layer: 5
   m_Name: Arena
   m_TagString: Untagged
@@ -299,7 +394,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 172909702}
   m_Father: {fileID: 185061887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -307,13 +403,49 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -120, y: -120}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &172909701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172909702}
+  - component: {fileID: 172909700}
+  m_Layer: 5
+  m_Name: Slime View
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &172909702
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172909701}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 172909699}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &172909700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172909698}
+  m_GameObject: {fileID: 172909701}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dace2eae30617c341809d9196ffd2c04, type: 3}

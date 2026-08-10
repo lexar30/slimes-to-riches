@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace SlimesToRiches.Arena.Core
 {
-    public sealed class ArenaWorld : MonoBehaviour
+    public sealed class ArenaGridProcessor : MonoBehaviour
     {
         [SerializeField]
         private ArenaSettingsSO settings;

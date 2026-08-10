@@ -17,7 +17,7 @@ namespace SlimesToRiches.Arena.Entities.Slimes
         private GeneralArenaSettingsSO generalArenaSettings;
 
         [SerializeField]
-        private ArenaWorld world;
+        private ArenaGridProcessor processor;
 
         [SerializeField]
         private UnityEvent<SlimeRuntimeState> slimeCreated = new();
@@ -37,9 +37,9 @@ namespace SlimesToRiches.Arena.Entities.Slimes
                 throw new ArgumentNullException(nameof(generalArenaSettings));
             }
 
-            if (world == null)
+            if (processor == null)
             {
-                throw new ArgumentNullException(nameof(world));
+                throw new ArgumentNullException(nameof(processor));
             }
 
             ValidateSettings(settings);
@@ -180,7 +180,7 @@ namespace SlimesToRiches.Arena.Entities.Slimes
 
         public void Generate()
         {
-            int requiredCount = GetSpawnCount(world.ActiveSlimesCount);
+            int requiredCount = GetSpawnCount(processor.ActiveSlimesCount);
 
             while (requiredCount > 0)
             {
