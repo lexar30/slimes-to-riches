@@ -5,11 +5,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
-using UnityEngine.UI;
 
 namespace SlimesToRiches.Arena.Core
 {
-    public class SlimeView : MonoBehaviour
+    public sealed class SlimeView : MonoBehaviour
     {
         [SerializeField]
         private SizeScaleTableSO sizeScaleSettings = null;
@@ -21,17 +20,38 @@ namespace SlimesToRiches.Arena.Core
         private ArenaViewSettingsSO settings = null;
 
         [SerializeField]
-        private RectTransform arenaRectTransform = null;
+        private Vector2 arenaSize = new(8.0f, 8.0f);
 
         private ObjectPool<EntityView> slimesPool;
-        private Dictionary<SlimeRuntimeState, EntityView> slimes = new();
-        // Later:
-        // private Dictionary<SlimeRuntimeState, EntityView> projectiles = new(); projectiles
-        // private List<KeyValuePair<GunRuntimeState, EntityView>> guns = new(); pair of gun->view
-        // private KeyValuePair<Mouse Pointer, EntityView> guns = new(); mouse
+        private readonly Dictionary<SlimeRuntimeState, EntityView> slimes = new();
 
         private void Awake()
         {
+            if (sizeScaleSettings == null)
+            {
+                throw new ArgumentNullException(nameof(sizeScaleSettings));
+            }
+
+            if (generalArenaSettings == null)
+            {
+                throw new ArgumentNullException(nameof(generalArenaSettings));
+            }
+
+            if (settings == null)
+            {
+                throw new ArgumentNullException(nameof(settings));
+            }
+
+            if (settings.ViewPrefab == null)
+            {
+                throw new ArgumentNullException(nameof(settings.ViewPrefab));
+            }
+
+            if (arenaSize.x <= 0.0f || arenaSize.y <= 0.0f)
+            {
+                throw new ArgumentOutOfRangeException(nameof(arenaSize));
+            }
+
             slimesPool = new ObjectPool<EntityView>(
                 createFunc: OnCreate
                 , actionOnRelease: OnRelease
@@ -43,33 +63,18 @@ namespace SlimesToRiches.Arena.Core
             );
         }
 
-        public Vector2 NormalizedToAnchoredPosition(Vector2 normalizedPosition)
+        public Vector3 NormalizedToLocalPosition(Vector2 normalizedPosition)
         {
-            if (arenaRectTransform == null)
-            {
-                throw new ArgumentException(
-                    "[SlimeView::NormalizedToAnchoredPosition]: arenaRectTransform not set.",
-                    nameof(settings)
-                );
-            }
-
-            return new Vector2(
-                Mathf.Lerp(
-                    arenaRectTransform.rect.xMin,
-                    arenaRectTransform.rect.xMax,
-                    normalizedPosition.x
-                ),
-                Mathf.Lerp(
-                    arenaRectTransform.rect.yMin,
-                    arenaRectTransform.rect.yMax,
-                    normalizedPosition.y
-                )
+            return new Vector3(
+                (normalizedPosition.x - 0.5f) * arenaSize.x,
+                (normalizedPosition.y - 0.5f) * arenaSize.y,
+                0.0f
             );
         }
 
         private void Sync(EntityView view, SlimeRuntimeState slimeState)
         {
-            view.RectTransform.anchoredPosition = NormalizedToAnchoredPosition(slimeState.NormalizedPosition);
+            view.Transform.localPosition = NormalizedToLocalPosition(slimeState.NormalizedPosition);
         }
 
         public void Sync()
@@ -89,11 +94,15 @@ namespace SlimesToRiches.Arena.Core
                 return;
             }
 
-            view.Image.sprite = slimeState.DescriptionSO.Sprite;
-            view.RectTransform.localPosition = Vector3.zero;
+            view.SpriteRenderer.sprite = slimeState.DescriptionSO.Sprite;
+            view.Transform.localPosition = Vector3.zero;
 
             float scale = sizeScaleSettings.GetScaleFor(slimeState.Size);
-            view.RectTransform.localScale = new Vector3(scale, scale, 1.0f);
+            view.Transform.localScale = new Vector3(
+                view.BaseScale.x * scale,
+                view.BaseScale.y * scale,
+                view.BaseScale.z
+            );
 
             slimes.Add(slimeState, view);
 
@@ -115,26 +124,21 @@ namespace SlimesToRiches.Arena.Core
         {
             GameObject instance = Instantiate(
                 settings.ViewPrefab,
-                arenaRectTransform,
+                transform,
                 false
             );
 
-            EntityView view = new EntityView();
+            EntityView view = new EntityView
+            {
+                Transform = instance.transform,
+                SpriteRenderer = instance.GetComponent<SpriteRenderer>(),
+                BaseScale = instance.transform.localScale
+            };
 
-            view.RectTransform = instance.GetComponent<RectTransform>();
-            if (view.RectTransform == null)
+            if (view.SpriteRenderer == null)
             {
                 throw new ArgumentException(
-                    "[SlimeView::Create]: prefab must contain RectTransform.",
-                    nameof(settings)
-                );
-            }
-
-            view.Image = instance.GetComponent<Image>();
-            if (view.Image == null)
-            {
-                throw new ArgumentException(
-                    "[SlimeView::Create]: prefab must contain Image.",
+                    "[SlimeView::Create]: prefab must contain SpriteRenderer.",
                     nameof(settings)
                 );
             }
@@ -149,17 +153,17 @@ namespace SlimesToRiches.Arena.Core
                 return;
             }
 
-            view.RectTransform.gameObject.SetActive(false);
+            view.Transform.gameObject.SetActive(false);
         }
 
         private void OnGet(EntityView view)
         {
-            view.RectTransform.gameObject.SetActive(true);
+            view.Transform.gameObject.SetActive(true);
         }
 
         private void OnPoolEntityDestroy(EntityView view)
         {
-            Destroy(view.RectTransform.gameObject);
+            Destroy(view.Transform.gameObject);
         }
     }
 }

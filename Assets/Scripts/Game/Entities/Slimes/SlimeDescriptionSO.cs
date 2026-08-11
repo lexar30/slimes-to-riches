@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SlimesToRiches.Arena.Entities.Slimes
@@ -23,5 +24,7 @@ namespace SlimesToRiches.Arena.Entities.Slimes
 
         public float CollisionRadius = 0.0f;
         public Vector2 CollisionOffset = Vector2.zero;
+
+        private List<SlimeState> AvailableStates = new List<SlimeState> { SlimeState.Idling };
     }
 }

@@ -267,12 +267,12 @@ namespace SlimesToRiches.Arena.Entities.Slimes
 
             if (UnityEngine.Random.Range(0, 2) == 0)
             {
-                slimeState.State = SlimeState.Idle;
+                slimeState.State = SlimeState.Idling;
                 slimeState.CurrentTimer = UnityEngine.Random.Range(description.IdlingTimeMin, description.IdlingTimeMax);
             }
             else
             {
-                slimeState.State = SlimeState.Moving;
+                slimeState.State = SlimeState.Wandering;
                 slimeState.CurrentTimer = UnityEngine.Random.Range(description.MovingTimeMin, description.MovingTimeMax);
                 slimeState.Velocity = MovementProcessor.GenerateRandomVelocity(description.SpeedMin, description.SpeedMax);
             }

@@ -13,14 +13,10 @@ namespace SlimesToRiches.UI
         private GameObject infoPanelSlot = null;
 
         [SerializeField]
-        private GameObject gameFieldSlot = null;
-
-        [SerializeField]
         private GameObject upgradesPanelSlot = null;
 
         public GameObject Root => root;
         public GameObject InfoPanelSlot => infoPanelSlot;
-        public GameObject GameFieldSlot => gameFieldSlot;
         public GameObject UpgradesPanelSlot => upgradesPanelSlot;
     }
 
@@ -44,9 +40,6 @@ namespace SlimesToRiches.UI
         [Header("InGame UI Panels")]
         [SerializeField]
         private GameObject infoPanel = null;
-
-        [SerializeField]
-        private GameObject gameField = null;
 
         [SerializeField]
         private GameObject upgradesPanel = null;
@@ -77,7 +70,7 @@ namespace SlimesToRiches.UI
                 return false;
             }
 
-            if (settings.Root == null || settings.InfoPanelSlot == null || settings.GameFieldSlot == null || settings.UpgradesPanelSlot == null)
+            if (settings.Root == null || settings.InfoPanelSlot == null || settings.UpgradesPanelSlot == null)
             {
                 return false;
             }
@@ -110,9 +103,6 @@ namespace SlimesToRiches.UI
             infoPanel.transform.SetParent(currentSettings.InfoPanelSlot.transform, false);
             ResetTransform(infoPanel);
 
-            gameField.transform.SetParent(currentSettings.GameFieldSlot.transform, false);
-            ResetTransform(gameField);
-
             upgradesPanel.transform.SetParent(currentSettings.UpgradesPanelSlot.transform, false);
             ResetTransform(upgradesPanel);
         }
@@ -120,7 +110,7 @@ namespace SlimesToRiches.UI
         private void Start()
         {
             bool isSettingsCorrect = IsCorrectSettings(portraitSettings) && IsCorrectSettings(landscapeSettings);
-            bool isPanelsCorrect = infoPanel != null && gameField != null && upgradesPanel != null;
+            bool isPanelsCorrect = infoPanel != null && upgradesPanel != null;
 
             if (scaler == null || !isSettingsCorrect || !isPanelsCorrect)
             {

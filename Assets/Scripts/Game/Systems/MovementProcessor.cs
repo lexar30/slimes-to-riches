@@ -23,7 +23,7 @@ namespace SlimesToRiches.Arena.Systems
                 return;
             }
 
-            slimeState.State = SlimeState.Moving;
+            slimeState.State = SlimeState.Wandering;
 
             slimeState.Velocity =
                 GenerateRandomVelocity(
@@ -43,7 +43,7 @@ namespace SlimesToRiches.Arena.Systems
             if (slimeState.CurrentTimer <= 0.01f)
             {
                 slimeState.Velocity = Vector2.zero;
-                slimeState.State = SlimeState.Idle;
+                slimeState.State = SlimeState.Idling;
                 slimeState.CurrentTimer =
                     UnityEngine.Random.Range(
                         slimeState.DescriptionSO.IdlingTimeMin
@@ -68,7 +68,7 @@ namespace SlimesToRiches.Arena.Systems
                 return;
             }
 
-            if (slimeState.State == SlimeState.Moving)
+            if (slimeState.State == SlimeState.Wandering)
             {
                 UpdateMoving(slimeState, dt);
             }
