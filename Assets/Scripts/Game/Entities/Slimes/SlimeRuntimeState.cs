@@ -1,6 +1,3 @@
-using SlimesToRiches.Arena.Entities;
-using UnityEngine;
-
 namespace SlimesToRiches.Arena.Entities.Slimes
 {
     public enum SlimeState
@@ -10,7 +7,7 @@ namespace SlimesToRiches.Arena.Entities.Slimes
         , Fleeing
     }
 
-    public sealed class SlimeRuntimeState : MovableRuntimeState
+    public sealed class SlimeRuntimeState
     {
         public int CurrentHP = 0;
         public SlimeState State = SlimeState.Idling;

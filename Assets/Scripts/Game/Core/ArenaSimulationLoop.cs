@@ -9,24 +9,20 @@ namespace SlimesToRiches.Arena.Core
         private UnityEvent PreSimulation = new();
 
         [SerializeField]
-        private UnityEvent<float> CalculateMovement = new();
-
-        [SerializeField]
-        private UnityEvent CalculateCollision = new();
-
-        [SerializeField]
-        private UnityEvent PostSimulation = new();
+        private UnityEvent<float> ProcessPhysics = new();
 
         [SerializeField]
         private UnityEvent UpdatePresentation = new();
 
         private void Update()
         {
-            PreSimulation?.Invoke();
-            CalculateMovement?.Invoke(Time.deltaTime);
-            CalculateCollision?.Invoke();
-            PostSimulation?.Invoke();
-            UpdatePresentation?.Invoke();
+            PreSimulation.Invoke();
+            UpdatePresentation.Invoke();
+        }
+
+        private void FixedUpdate()
+        {
+            ProcessPhysics.Invoke(Time.fixedDeltaTime);
         }
     }
 }

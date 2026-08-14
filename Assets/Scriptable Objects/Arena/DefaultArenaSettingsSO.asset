@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimesToRiches.Arena.Settings.ArenaSettingsSO
   columnsCount: 10
   rowsCount: 10
+  borderSizeInCells: 1

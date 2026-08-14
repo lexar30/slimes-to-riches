@@ -1,6 +1,5 @@
 using SlimesToRiches.Arena.Core;
 using SlimesToRiches.Arena.Settings;
-using SlimesToRiches.Arena.Systems;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,10 +16,13 @@ namespace SlimesToRiches.Arena.Entities.Slimes
         private GeneralArenaSettingsSO generalArenaSettings;
 
         [SerializeField]
-        private ArenaGridProcessor processor;
+        private ArenaSettingsSO arenaSettings;
 
         [SerializeField]
-        private UnityEvent<SlimeRuntimeState> slimeCreated = new();
+        private SlimePhysicsProcessor processor;
+
+        [SerializeField]
+        private UnityEvent<SlimeSpawnRequest> slimeCreated = new();
 
         private ObjectPool<SlimeRuntimeState> slimesPool;
         private HardnessLevelDescription currentHardnessLevel = null;
@@ -35,6 +37,11 @@ namespace SlimesToRiches.Arena.Entities.Slimes
             if (generalArenaSettings == null)
             {
                 throw new ArgumentNullException(nameof(generalArenaSettings));
+            }
+
+            if (arenaSettings == null)
+            {
+                throw new ArgumentNullException(nameof(arenaSettings));
             }
 
             if (processor == null)
@@ -191,13 +198,13 @@ namespace SlimesToRiches.Arena.Entities.Slimes
                     return;
                 }
 
-                if (!TryInitialize(slimeState))
+                if (!TryInitialize(slimeState, out SlimeSpawnRequest spawnRequest))
                 {
                     slimesPool.Release(slimeState);
                     return;
                 }
 
-                slimeCreated?.Invoke(slimeState);
+                slimeCreated.Invoke(spawnRequest);
                 --requiredCount;
             }
         }
@@ -239,8 +246,10 @@ namespace SlimesToRiches.Arena.Entities.Slimes
             return null;
         }
 
-        public bool TryInitialize(SlimeRuntimeState slimeState)
+        private bool TryInitialize(SlimeRuntimeState slimeState, out SlimeSpawnRequest spawnRequest)
         {
+            spawnRequest = null;
+
             if (slimeState == null)
             {
                 Debug.Log("[SlimeRuntimeState::Initialize]: Unable to initialize");
@@ -255,13 +264,16 @@ namespace SlimesToRiches.Arena.Entities.Slimes
             }
 
             Rect spawnArea = settings.NormalizedGenerationAreaConstraints;
-            slimeState.NormalizedPosition =
-                new Vector2(
-                    UnityEngine.Random.Range(spawnArea.xMin, spawnArea.xMax)
-                    , UnityEngine.Random.Range(spawnArea.yMin, spawnArea.yMax)
-                );
+            Vector2 normalizedPosition = new Vector2(
+                UnityEngine.Random.Range(spawnArea.xMin, spawnArea.xMax),
+                UnityEngine.Random.Range(spawnArea.yMin, spawnArea.yMax)
+            );
 
-            slimeState.Velocity = Vector2.zero;
+            Vector2 arenaPosition = new Vector2(
+                (normalizedPosition.x - 0.5f) * arenaSettings.columnsCount,
+                (normalizedPosition.y - 0.5f) * arenaSettings.rowsCount
+            );
+
             slimeState.CurrentHP = description.MaxHP;
             slimeState.Size = UnityEngine.Random.Range(description.SizeMin, description.SizeMax + 1);
 
@@ -274,10 +286,10 @@ namespace SlimesToRiches.Arena.Entities.Slimes
             {
                 slimeState.State = SlimeState.Wandering;
                 slimeState.CurrentTimer = UnityEngine.Random.Range(description.MovingTimeMin, description.MovingTimeMax);
-                slimeState.Velocity = MovementProcessor.GenerateRandomVelocity(description.SpeedMin, description.SpeedMax);
             }
 
             slimeState.DescriptionSO = description;
+            spawnRequest = new SlimeSpawnRequest(slimeState, arenaPosition);
 
             return true;
         }

@@ -7,5 +7,10 @@ namespace SlimesToRiches.Arena.Settings
     {
         public int columnsCount = 0;
         public int rowsCount = 0;
+
+        public int borderSizeInCells = 1;
+
+        public int TotalColumnsCount => columnsCount + borderSizeInCells * 2;
+        public int TotalRowsCount => rowsCount + borderSizeInCells * 2;
     }
 }
